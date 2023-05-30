@@ -22,11 +22,63 @@ public class UIManagerr : MonoBehaviour
     public GameObject iap;
     public GameObject information;
 
+
+
+    public void Start()
+    {
+        if (PlayerPrefs.HasKey("Sound") == false)
+        {
+            PlayerPrefs.SetInt("Sound", 1);
+        }
+    }
+
+
+
+
+
+    public void Privacy_Policy()
+    {
+        Application.OpenURL("https://sites.google.com/view/hypeballdash/privacy-police?authuser=1");
+    }
+    public void Term_of_use()
+    {
+        Application.OpenURL("https://sites.google.com/view/hypeballdash/term-of-use?authuser=1");
+    }
    public void Setting_Open()
     {
         setting_open.SetActive(false);
         setting_close.SetActive(true);
         LayoutAnimator.SetTrigger("slide_in");
+
+        if (PlayerPrefs.GetInt("Sound") == 1)
+        {
+            sound_on.SetActive(true);
+            sound_off.SetActive(false);
+            AudioListener.volume = 1;
+        }
+
+        else if (PlayerPrefs.GetInt("Sound") == 2)
+        {
+            sound_on.SetActive(false);
+            sound_off.SetActive(true);
+            AudioListener.volume = 0;
+        }
+
+
+
+
+         if (PlayerPrefs.GetInt("Vibration") == 1)
+        {
+            vibration_off.SetActive(false);
+            vibration_on.SetActive(true);
+        }
+
+        else if (PlayerPrefs.GetInt("Vibration") == 2)
+        {
+            vibration_on.SetActive(false);
+            vibration_off.SetActive(true);
+        }
+
     }
 
     public void Setting_Close()
@@ -40,26 +92,34 @@ public class UIManagerr : MonoBehaviour
     {
         sound_on.SetActive(false);
         sound_off.SetActive(true);
+        AudioListener.volume = 0;
+        PlayerPrefs.SetInt("Sound", 2);
     }
 
     public void Sound_Off()
     {
         sound_on.SetActive(true);
         sound_off.SetActive(false);
+        AudioListener.volume = 1;
+        PlayerPrefs.SetInt("Sound", 1);
     }
 
     public void Vibration_On()
     {
         vibration_on.SetActive(false);
         vibration_off.SetActive(true);
+        PlayerPrefs.SetInt("Vibration", 2);
     }
     public void Vibration_Off()
     {
         vibration_off.SetActive(false);
         vibration_on.SetActive(true);
+        PlayerPrefs.SetInt("Vibration", 1);
     }
 
-
+    //haskey
+    //get
+    //set
 
 
     public IEnumerator whiteEffect()
