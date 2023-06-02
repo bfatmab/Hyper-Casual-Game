@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -22,24 +23,30 @@ public class Player : MonoBehaviour
     [Range(0, 20)]
     public int speedModifier;
     public int forwardSpeed;
+
+    public bool speedBallForward = false;
+    public bool firstTouchControl = false;
+
+
+
     public void Start()
     {
-        body=GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
     }
     public void Update()
     {
 
-        if (Variables.firsttouch == 1)
+        if (Variables.firsttouch == 1&&speedBallForward==false)
         {
             transform.position += new Vector3(0, 0, forwardSpeed * Time.deltaTime);
-            Cam.transform.position += new Vector3(0, 0, forwardSpeed * Time.deltaTime);
+           
             vectorback.transform.position += new Vector3(0, 0, forwardSpeed * Time.deltaTime);
             vectorforward.transform.position += new Vector3(0, 0, forwardSpeed * Time.deltaTime);
         }
 
 
 
-        if (Input.touchCount >0)
+        if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
 
@@ -47,27 +54,51 @@ public class Player : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                Variables.firsttouch = 1;
+                if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    if (firstTouchControl == false)
+                    {
+                        Variables.firsttouch = 1;
+                        uIManagerr.FirstTouch();
+                        firstTouchControl = true;
+                    }
+                    
+                }
+               
             }
 
 
-            else  if (touch.phase==TouchPhase.Moved)
+            else if (touch.phase == TouchPhase.Moved)
             {
-                body.velocity = new Vector3( touch.deltaPosition.x * speedModifier  *Time.deltaTime,
+                body.velocity = new Vector3(touch.deltaPosition.x * speedModifier * Time.deltaTime,
                  transform.position.y,
-                 touch.deltaPosition.y * speedModifier*Time.deltaTime );
+                 touch.deltaPosition.y * speedModifier * Time.deltaTime);
+
+                if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    body.velocity = new Vector3(touch.deltaPosition.x * speedModifier * Time.deltaTime,
+                 transform.position.y,
+                 touch.deltaPosition.y * speedModifier * Time.deltaTime);
+                    if (firstTouchControl == false)
+                    {
+                        Variables.firsttouch = 1;
+                        uIManagerr.FirstTouch();
+                        firstTouchControl = true;
+                    }
+
+                }
             }
 
             //transform position=for player moving
             //velocity=
             //Addforce=adding newton everytime
         }
-        else if (touch.phase==TouchPhase.Ended)
+        else if (touch.phase == TouchPhase.Ended)
         {
             //when player don't touch screen,ball cant move.
             body.velocity = Vector3.zero;
         }
-        
+
     }
 
     public GameObject[] FractureItems;
@@ -84,6 +115,30 @@ public class Player : MonoBehaviour
                 item.GetComponent<SphereCollider>().enabled = true;
                 item.GetComponent<Rigidbody>().isKinematic = false;
             }
+            StartCoroutine("TimeScaleControl");
+           
         }
+
+
     }
+
+    public IEnumerator TimeScaleControl()
+    {
+        speedBallForward = true;
+        yield return new WaitForSecondsRealtime(0.4f);
+        Time.timeScale = 0.4f;
+        yield return new WaitForSecondsRealtime(0.6f);
+        uIManagerr.RestartButtonActive();
+        body.velocity = Vector3.zero;
+
+
+
+    }
+
+
+
+
+
+
+
 }

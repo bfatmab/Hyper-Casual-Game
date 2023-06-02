@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManagerr : MonoBehaviour
 {
@@ -14,13 +15,19 @@ public class UIManagerr : MonoBehaviour
 
     public GameObject setting_open;
     public GameObject setting_close;
-
+    public GameObject layout_Background;
     public GameObject sound_on;
     public GameObject sound_off;
     public GameObject vibration_on;
     public GameObject vibration_off;
     public GameObject iap;
     public GameObject information;
+    public GameObject intro_hand;
+    public GameObject toptomove_Text;
+    public GameObject noAds;
+    public GameObject shop;
+
+    public GameObject Restart_screen;
 
 
 
@@ -35,6 +42,38 @@ public class UIManagerr : MonoBehaviour
 
 
 
+
+    public void FirstTouch()
+    {
+        intro_hand.SetActive(false);
+        toptomove_Text.SetActive(false);
+        noAds.SetActive(false);
+        shop.SetActive(false);
+        setting_close.SetActive(false); 
+        setting_open.SetActive(false);  
+        layout_Background.SetActive(false);
+        sound_off.SetActive(false);
+        sound_on.SetActive(false);
+        vibration_on.SetActive(!false);
+        vibration_off.SetActive(!false);
+        iap.SetActive(false);
+        information.SetActive(false);
+    }
+
+
+
+    public void RestartButtonActive()
+    {
+        Restart_screen.SetActive(true);
+    }
+
+    public void RestartScene()
+    {
+        Variables.firsttouch = 0;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
 
     public void Privacy_Policy()
     {
