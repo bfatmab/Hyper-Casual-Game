@@ -10,6 +10,7 @@ public class UIManagerr : MonoBehaviour
 {
     public Image whiteEffectImage;
     private int effectControl=0;
+    private bool radialShine;
 
     public Animator LayoutAnimator;
 
@@ -33,6 +34,12 @@ public class UIManagerr : MonoBehaviour
 
     //Game en screen
     public GameObject finishScreen;
+    public GameObject blackBackground;
+    public GameObject complete;
+    public GameObject radial_shine;
+    public GameObject coin;
+    public GameObject rewarded;
+    public GameObject no_thanks;
 
     public void Start()
     {
@@ -48,6 +55,14 @@ public class UIManagerr : MonoBehaviour
 
         CoinTextUpdate();   
 
+    }
+
+    public void Update()
+    {
+        if (radialShine == true)
+        {
+            radial_shine.GetComponent<RectTransform>().Rotate(new Vector3(0,0, 15f * Time.deltaTime));
+        }
     }
 
 
@@ -92,6 +107,27 @@ public class UIManagerr : MonoBehaviour
 
     public void FinishScreen()
     {
+        StartCoroutine(FinishLaunch());
+
+    }
+
+    public IEnumerator FinishLaunch()
+    {
+        Time.timeScale = 0.5f;
+        radialShine = true;
+        finishScreen.SetActive(true);
+        blackBackground.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.8f);
+        complete.SetActive(true);
+        yield return new WaitForSecondsRealtime(1.3f);
+        radial_shine.SetActive(true);
+        coin.SetActive(true);
+        yield return new WaitForSecondsRealtime(1f);
+        rewarded.SetActive(true);
+        yield return new WaitForSecondsRealtime(3.5f);
+        no_thanks.SetActive(true);
+
+
 
     }
 

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game over");
             Coin(100);
             uimanager.CoinTextUpdate();
+            uimanager.FinishScreen();
         }
     }
 
