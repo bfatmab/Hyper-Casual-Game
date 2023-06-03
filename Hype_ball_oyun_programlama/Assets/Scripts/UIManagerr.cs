@@ -12,10 +12,15 @@ public class UIManagerr : MonoBehaviour
     private int effectControl=0;
     private bool radialShine;
 
+    public Image FillRateImage;
+    public GameObject Player;
+    public GameObject FinishLine;
+
     public Animator LayoutAnimator;
 
     public Text coin_Text;
 
+    //Buttons
     public GameObject setting_open;
     public GameObject setting_close;
     public GameObject layout_Background;
@@ -41,6 +46,10 @@ public class UIManagerr : MonoBehaviour
     public GameObject rewarded;
     public GameObject no_thanks;
 
+    public GameObject achivedCoin;
+    public GameObject nextLevel;
+    public Text achivedCoinText;
+
     public void Start()
     {
         if (PlayerPrefs.HasKey("Sound") == false)
@@ -63,6 +72,8 @@ public class UIManagerr : MonoBehaviour
         {
             radial_shine.GetComponent<RectTransform>().Rotate(new Vector3(0,0, 15f * Time.deltaTime));
         }
+
+        FillRateImage.fillAmount = ((Player.transform.position.z*100) / (FinishLine.transform.position.z))/100;
     }
 
 
@@ -103,7 +114,12 @@ public class UIManagerr : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
-
+    public void NextScene()
+    {
+        Variables.firsttouch = 0;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
 
     public void FinishScreen()
     {
@@ -130,7 +146,24 @@ public class UIManagerr : MonoBehaviour
 
 
     }
+    public IEnumerator AfterRewardButton()
+    {
+        achivedCoin.SetActive(true);
+        achivedCoinText.gameObject.SetActive(true);
+        rewarded.SetActive(false);
+        no_thanks.SetActive(false);
+        for (int i = 0; i < 401; i += 4)
+        {
+            achivedCoinText.text = "+" + i.ToString();
+            yield return new WaitForSeconds(0.0001f);
+        }
+     
+       
+        yield return new WaitForSecondsRealtime(1f);
+        nextLevel.SetActive(true);
 
+      
+    }
 
     public void Privacy_Policy()
     {
