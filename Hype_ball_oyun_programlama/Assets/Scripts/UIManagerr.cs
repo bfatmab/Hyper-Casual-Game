@@ -4,6 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIManagerr : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UIManagerr : MonoBehaviour
 
     public Animator LayoutAnimator;
 
+    public Text coin_Text;
 
     public GameObject setting_open;
     public GameObject setting_close;
@@ -29,7 +31,8 @@ public class UIManagerr : MonoBehaviour
 
     public GameObject Restart_screen;
 
-
+    //Game en screen
+    public GameObject finishScreen;
 
     public void Start()
     {
@@ -37,10 +40,21 @@ public class UIManagerr : MonoBehaviour
         {
             PlayerPrefs.SetInt("Sound", 1);
         }
+
+        if (PlayerPrefs.HasKey("Vibration") == false)
+        {
+            PlayerPrefs.SetInt("Vibration", 1);
+        }
+
+        CoinTextUpdate();   
+
     }
 
 
-
+    public void CoinTextUpdate()
+    {
+        coin_Text.text = PlayerPrefs.GetInt("moneyy").ToString();
+    }
 
 
     public void FirstTouch()
@@ -74,6 +88,13 @@ public class UIManagerr : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
+
+
+    public void FinishScreen()
+    {
+
+    }
+
 
     public void Privacy_Policy()
     {
