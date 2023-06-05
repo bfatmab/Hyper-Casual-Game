@@ -17,6 +17,12 @@ public class bannered : MonoBehaviour
 
     void Start()
     {
+
+        if (PlayerPrefs.HasKey("NoAds") == false)
+        {
+            PlayerPrefs.SetInt("NoAds", 0);
+        } 
+
         // Get the Ad Unit ID for the current platform:
 #if UNITY_IOS
         _adUnitId = _iOSAdUnitId;
@@ -24,31 +30,36 @@ public class bannered : MonoBehaviour
         _adUnitId = _androidAdUnitId;
 #endif
 
-        // Disable the button until an ad is ready to show:
-        // _showBannerButton.interactable = false;
-        //_hideBannerButton.interactable = false;
+
 
         // Set the banner position:
         Advertisement.Banner.SetPosition(_bannerPosition);
 
-        // Configure the Load Banner button to call the LoadBanner() method when clicked:
-        //  _loadBannerButton.onClick.AddListener(LoadBanner);
-        // _loadBannerButton.interactable = true;
         LoadBanner();
     }
 
-    // Implement a method to call when the Load Banner button is clicked:
+   
     public void LoadBanner()
     {
-        // Set up options to notify the SDK of load events:
-        BannerLoadOptions options = new BannerLoadOptions
+   
+        if (PlayerPrefs.HasKey("NoAds") && PlayerPrefs.GetInt("NoAds") == 0)
         {
-            loadCallback = OnBannerLoaded,
-            errorCallback = OnBannerError
-        };
+           //Set up options to notify the SDK of load events:
+            BannerLoadOptions options = new BannerLoadOptions
+            {
+                loadCallback = OnBannerLoaded,
+                errorCallback = OnBannerError
+            };
 
-        // Load the Ad Unit with banner content:
-        Advertisement.Banner.Load(_adUnitId, options);
+            // Load the Ad Unit with banner content:
+            Advertisement.Banner.Load(_adUnitId, options);
+        }
+
+        else
+        {
+            return;
+        }
+        
     }
 
     // Implement code to execute when the loadCallback event triggers:

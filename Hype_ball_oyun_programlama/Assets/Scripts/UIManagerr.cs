@@ -62,6 +62,13 @@ public class UIManagerr : MonoBehaviour
             PlayerPrefs.SetInt("Vibration", 1);
         }
 
+     
+
+        if (PlayerPrefs.GetInt("NoAds") == 1)
+        {
+            NoAdsRemove();
+        }
+
         CoinTextUpdate();   
 
     }
@@ -101,7 +108,10 @@ public class UIManagerr : MonoBehaviour
     }
 
 
-
+    public void NoAdsRemove()
+    {
+        noAds.SetActive(false);
+    }
     public void RestartButtonActive()
     {
         Restart_screen.SetActive(true);

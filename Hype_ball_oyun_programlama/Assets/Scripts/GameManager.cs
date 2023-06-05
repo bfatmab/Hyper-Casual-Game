@@ -18,7 +18,11 @@ public class GameManager : MonoBehaviour
         if(other.gameObject.CompareTag("Player")&& gameObject.CompareTag("Finish_line"))
         {
             Debug.Log("Game over");
-            interstitial.LoadAd();
+            if(PlayerPrefs.HasKey("NoAds") && PlayerPrefs.GetInt("NoAds") == 0)
+            {
+                interstitial.LoadAd();
+            }
+           
             rewarded.LoadAd();
             Coin(100);
             uimanager.CoinTextUpdate();

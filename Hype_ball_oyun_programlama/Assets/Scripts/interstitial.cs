@@ -1,12 +1,14 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using Debug = UnityEngine.Debug;
 
 public class interstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] string _androidAdUnitId = "Interstitial_Android";
     [SerializeField] string _iOsAdUnitId = "Interstitial_iOS";
     string _adUnitId;
-
+    
     void Awake()
     {
         // Get the Ad Unit ID for the current platform:
@@ -29,10 +31,17 @@ public class interstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowL
     // Show the loaded content in the Ad Unit:
     public void ShowAd()
     {
-        // Note that if the ad content wasn't previously loaded, this method will fail
-        Debug.Log("Showing Ad: " + _adUnitId);
-        Advertisement.Show(_adUnitId, this);
-        LoadAd();
+        if (PlayerPrefs.HasKey("NoAds") && PlayerPrefs.GetInt("NoAds") == 0)  
+         {
+            Debug.Log("Showing Ad: " + _adUnitId);
+            Advertisement.Show(_adUnitId, this);
+            LoadAd();
+        }
+         else
+        {
+            return; // Reklam? gösterme, "NoAds" anahtar?n?n de?eri 1 ise yani reklamlar?n kald?r?ld??? durumda
+        }
+
     }
 
     // Implement Load Listener and Show Listener interface methods: 
@@ -57,17 +66,5 @@ public class interstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowL
     public void OnUnityAdsShowClick(string _adUnitId) { }
     public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) { }
 
-    //public void Coin(int money)
-    //{
-    //    if (PlayerPrefs.HasKey("moneyy"))
-    //    {
-    //        int oldScore = PlayerPrefs.GetInt("moneyy");
-    //        PlayerPrefs.SetInt("moneyy", oldScore + money);
-    //    }
-    //    else
-    //    {
-    //        PlayerPrefs.SetInt("moneyy", 0);
-    //    }
-    //}
-
+    
 }

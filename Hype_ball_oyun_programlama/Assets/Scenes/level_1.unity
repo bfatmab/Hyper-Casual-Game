@@ -10303,7 +10303,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 842639814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1518821316}
+        m_TargetAssemblyTypeName: IAPController, Assembly-CSharp
+        m_MethodName: IAPButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: coin_2500
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &842639814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18970,7 +18982,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1397893769}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1518821316}
+        m_TargetAssemblyTypeName: IAPController, Assembly-CSharp
+        m_MethodName: IAPButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: remove_ads
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1397893769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19612,6 +19636,56 @@ Transform:
   - {fileID: 1246162252}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1518821315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1518821317}
+  - component: {fileID: 1518821316}
+  m_Layer: 0
+  m_Name: IAPManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1518821316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518821315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf1b955612f6c543ba493749c47a084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  managerr: {fileID: 1017315665}
+  product:
+  - coin_2500
+  - coin_5000
+  - coin_10000
+  - remove_ads
+--- !u!4 &1518821317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518821315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 530.3902, y: 374.40964, z: 286.753}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1520448529
 GameObject:
@@ -20484,7 +20558,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1578721994}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1518821316}
+        m_TargetAssemblyTypeName: IAPController, Assembly-CSharp
+        m_MethodName: IAPButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: coin_10000
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1578721994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27309,7 +27395,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2117359599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1518821316}
+        m_TargetAssemblyTypeName: IAPController, Assembly-CSharp
+        m_MethodName: IAPButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: coin_5000
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2117359599
 MonoBehaviour:
   m_ObjectHideFlags: 0
