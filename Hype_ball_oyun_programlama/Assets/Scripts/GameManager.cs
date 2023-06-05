@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             Coin(100);
             uimanager.CoinTextUpdate();
             uimanager.FinishScreen();
-            PlayerPrefs.SetInt("LevelIndex", PlayerPrefs.GetInt("LEvelIndex") + 1);
+            PlayerPrefs.SetInt("LevelIndex", PlayerPrefs.GetInt("LevelIndex") + 1);
         }
     }
 
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("moneyy", 0);
+            PlayerPrefs.SetInt("moneyy", 50000);
         }
     }
 
